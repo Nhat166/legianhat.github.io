@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Profile</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+*{box-sizing:border-box}
+body{
+  margin:0;
+  background:#000;
+  font-family:Arial,Helvetica,sans-serif;
+  overflow:hidden;
+  color:#fff;
+}
+
+/* NỀN SAO */
+canvas{
+  position:fixed;
+  inset:0;
+  z-index:0;
+}
+
+/* CARD CHÍNH */
+.profile-card{
+  position:relative;
+  z-index:1;
+  width:1000px;
+  max-width:90%;
+  margin:120px 0 0 80px; /* lệch trái như ảnh mẫu */
+  display:flex;
+  gap:40px;
+  padding:30px;
+  background:rgba(10,20,40,0.6);
+  backdrop-filter:blur(14px);
+  border-radius:20px;
+}
+
+/* CỘT TRÁI */
+.left{
+  flex:1;
+}
+.left h1{
+  margin:0;
+  font-size:32px;
+}
+.left .sub{
+  color:#9fb3ff;
+  margin:5px 0 15px;
+}
+.tags{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+}
+.tags span{
+  background:#1b3b5a;
+  padding:6px 12px;
+  border-radius:20px;
+  font-size:13px;
+}
+.quote{
+  margin:15px 0;
+  color:#cfd8ff;
+}
+.btn{
+  background:#4de0c8;
+  color:#000;
+  border:none;
+  padding:10px 20px;
+  border-radius:10px;
+  cursor:pointer;
+  margin-bottom:15px;
+}
+.info{
+  display:flex;
+  gap:40px;
+  font-size:14px;
+  color:#cfd8ff;
+}
+
+/* CỘT PHẢI */
+.right{
+  width:280px;
+  text-align:center;
+}
+.avatar{
+  width:130px;
+  height:130px;
+  border-radius:50%;
+  object-fit:cover;
+  margin-bottom:10px;
+}
+.right h3{
+  margin:10px 0;
+  font-size:16px;
+}
+.social a{
+  display:block;
+  margin:8px 0;
+  padding:10px;
+  background:rgba(255,255,255,0.08);
+  border-radius:10px;
+  color:#fff;
+  text-decoration:none;
+  transition:0.2s;
+}
+.social a:hover{
+  background:rgba(255,255,255,0.18);
+}
+
+/* MOBILE */
+@media(max-width:768px){
+  .profile-card{
+    flex-direction:column;
+    margin:80px auto;
+  }
+  .right{width:100%}
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="stars"></canvas>
+
+<div class="profile-card">
+  <div class="left">
+    <h1>Lê Gia Nhật</h1>
+    <div class="sub">Học sinh THCS</div>
+
+    <div class="tags">
+      <span>Yêu thích Tin học</span>
+      <span>Đam mê lập trình</span>
+    </div>
+
+    <div class="quote">Sống để học và tạo giá trị.</div>
+
+    <button class="btn">Kết nối</button>
+
+    <div class="info">
+      <div>Trường<br>THCS Nghĩa Lộ</div>
+      <div>Lớp<br>8E</div>
+    </div>
+  </div>
+
+  <div class="right">
+    <img src="avatar.png" class="avatar">
+    <h3>Kết nối với tôi</h3>
+    <div class="social">
+      <a href="https://www.facebook.com/share/1BYUGTZGVx/" target="_blank">Facebook</a>
+      <a href="#">Instagram</a>
+      <a href="#">GitHub</a>
+      <a href="#">YouTube</a>
+      <a href="https://www.tiktok.com/@16th6.6" target="_blank">TikTok</a>
+    </div>
+  </div>
+</div>
+
+<script>
+const canvas=document.getElementById("stars");
+const ctx=canvas.getContext("2d");
+let w,h,stars=[];
+function resize(){
+  w=canvas.width=window.innerWidth;
+  h=canvas.height=window.innerHeight;
+}
+window.onresize=resize;
+resize();
+
+for(let i=0;i<200;i++){
+  stars.push({
+    x:Math.random()*w,
+    y:Math.random()*h,
+    r:Math.random()*1.5+0.5,
+    vx:Math.random()*0.4+0.2,
+    vy:Math.random()*0.4+0.2
+  });
+}
+
+function draw(){
+  ctx.clearRect(0,0,w,h);
+  ctx.fillStyle="#fff";
+  stars.forEach(s=>{
+    s.x+=s.vx;
+    s.y+=s.vy;
+    if(s.x>w) s.x=0;
+    if(s.y>h) s.y=0;
+    ctx.beginPath();
+    ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+    ctx.fill();
+  });
+  requestAnimationFrame(draw);
+}
+draw();
+</script>
+
+</body>
+</html>
