@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Profile</title>
+
+<style>
+:root{
+  --bg1:#020617;
+  --bg2:#0b1d35;
+  --card:#0f172aee;
+  --chip:#1e293b;
+  --accent:#34d399;
+  --text:#e5e7eb;
+  --muted:#94a3b8;
+}
+
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,sans-serif;
+}
+
+body{
+  min-height:100vh;
+  background:radial-gradient(circle at top,var(--bg2),var(--bg1));
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  overflow:hidden;
+  color:var(--text);
+}
+
+canvas{
+  position:fixed;
+  inset:0;
+  z-index:-1;
+}
+
+/* ===== CARD ===== */
+.card{
+  width:1050px;
+  padding:28px;
+  border-radius:20px;
+  background:var(--card);
+  display:grid;
+  grid-template-columns:2.1fr 1fr;
+  gap:28px;
+  backdrop-filter:blur(14px);
+}
+
+/* ===== LEFT ===== */
+.name{
+  font-size:36px;
+  font-weight:700;
+}
+
+.subtitle{
+  margin-top:6px;
+  color:var(--muted);
+}
+
+.chips{
+  margin:14px 0;
+}
+
+.chips span{
+  display:inline-block;
+  background:var(--chip);
+  padding:6px 14px;
+  border-radius:999px;
+  font-size:13px;
+  margin-right:6px;
+}
+
+.desc{
+  margin:14px 0;
+  color:#cbd5f5;
+  max-width:520px;
+  line-height:1.55;
+}
+
+.btn{
+  display:inline-block;
+  background:var(--accent);
+  color:#022c22;
+  padding:10px 22px;
+  border-radius:14px;
+  font-weight:600;
+  margin:10px 0 20px;
+}
+
+.meta{
+  display:flex;
+  gap:48px;
+  color:var(--muted);
+}
+
+.meta b{
+  color:#e5e7eb;
+}
+
+/* ===== RIGHT ===== */
+.right{
+  background:#020617;
+  border-radius:18px;
+  padding:22px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  gap:14px;
+}
+
+.avatar{
+  width:150px;
+  height:150px;
+  border-radius:50%;
+  object-fit:cover;
+  border:3px solid #38bdf8;
+}
+
+.social{
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.social a{
+  background:#0f172a;
+  padding:11px;
+  border-radius:12px;
+  text-decoration:none;
+  color:#fff;
+  text-align:center;
+  transition:.2s;
+}
+
+.social a:hover{
+  background:#1e293b;
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="stars"></canvas>
+
+<div class="card">
+  <!-- LEFT -->
+  <div>
+    <div class="name">Lê Gia Nhật</div>
+    <div class="subtitle">Học sinh THCS</div>
+
+    <div class="chips">
+      <span>Yêu thích Tin học</span>
+      <span>Đam mê lập trình</span>
+    </div>
+
+    <div class="desc">
+      Sống để học và tạo ra giá trị.
+    </div>
+
+    <div class="btn">Kết nối</div>
+
+    <div class="meta">
+      <div>
+        Trường<br>
+        <b>THCS Nghĩa Lộ</b>
+      </div>
+      <div>
+        Lớp<br>
+        <b>8E</b>
+      </div>
+    </div>
+  </div>
+
+  <!-- RIGHT -->
+  <div class="right">
+    <img src="avatar.png" class="avatar">
+
+    <div class="social">
+      <a href="https://www.facebook.com/share/1BYUGTZGVx/" target="_blank">Facebook</a>
+      <a href="https://www.tiktok.com/@16th6.6?_r=1&_t=ZS-93WmG6URvKG" target="_blank">TikTok</a>
+      <a href="#">Instagram</a>
+      <a href="#">GitHub</a>
+      <a href="#">YouTube</a>
+    </div>
+  </div>
+</div>
+
+<script>
+const c=document.getElementById("stars");
+const x=c.getContext("2d");
+
+function resize(){
+  c.width=innerWidth;
+  c.height=innerHeight;
+}
+resize();
+addEventListener("resize",resize);
+
+const stars=[...Array(240)].map(()=>({
+  x:Math.random()*c.width,
+  y:Math.random()*c.height,
+  r:Math.random()*1.6+.4,
+  vx:Math.random()*.7+.3,
+  vy:Math.random()*.7+.3
+}));
+
+(function draw(){
+  x.clearRect(0,0,c.width,c.height);
+  x.fillStyle="white";
+  stars.forEach(s=>{
+    x.beginPath();
+    x.arc(s.x,s.y,s.r,0,Math.PI*2);
+    x.fill();
+    s.x+=s.vx;
+    s.y+=s.vy;
+    if(s.x>c.width||s.y>c.height){
+      s.x=Math.random()*100;
+      s.y=-10;
+    }
+  });
+  requestAnimationFrame(draw);
+})();
+</script>
+
+</body>
+</html>
