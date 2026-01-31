@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Lê Gia Nhật</title>
+    <style>
+        /* Thiết lập nền tối và font chữ */
+        body {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: #020617;
+            font-family: 'Inter', 'Segoe UI', sans-serif;
+            color: white;
+            overflow: hidden;
+        }
+
+        /* Nền hiệu ứng sao */
+        #star-canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        /* Khung Profile chính */
+        .card {
+            background: rgba(15, 23, 42, 0.8);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 32px;
+            width: 90%;
+            max-width: 600px;
+            display: flex;
+            flex-direction: row;
+            gap: 30px;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.5);
+        }
+
+        /* Bên trái: Thông tin văn bản */
+        .info {
+            flex: 1;
+        }
+
+        .name {
+            font-size: 28px;
+            font-weight: 700;
+            margin: 0;
+        }
+
+        .role {
+            color: #38bdf8;
+            font-size: 14px;
+            margin-top: 4px;
+        }
+
+        .tags {
+            display: flex;
+            gap: 8px;
+            margin: 16px 0;
+        }
+
+        .tag {
+            background: rgba(255, 255, 255, 0.1);
+            font-size: 11px;
+            padding: 4px 12px;
+            border-radius: 20px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .motto {
+            font-size: 15px;
+            margin-bottom: 4px;
+            opacity: 0.9;
+        }
+
+        /* DÒNG YÊU CẦU: ƯỚC MƠ */
+        .dream {
+            font-size: 15px;
+            font-weight: 600;
+            color: #2dd4bf; /* Màu xanh ngọc nổi bật */
+            margin-bottom: 16px;
+            text-shadow: 0 0 8px rgba(45, 212, 191, 0.4);
+        }
+
+        .btn-connect {
+            background: #22c55e;
+            color: white;
+            border: none;
+            padding: 10px 24px;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-connect:hover {
+            background: #16a34a;
+            transform: translateY(-2px);
+        }
+
+        .school-info {
+            margin-top: 24px;
+            font-size: 13px;
+            opacity: 0.5;
+            line-height: 1.6;
+        }
+
+        /* Bên phải: Avatar và Mạng xã hội */
+        .actions {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+            min-width: 160px;
+        }
+
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            border: 4px solid rgba(255, 255, 255, 0.1);
+            object-fit: cover;
+            background: #1e293b;
+        }
+
+        .links {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            gap: 8px;
+        }
+
+        .links a {
+            background: rgba(255, 255, 255, 0.05);
+            color: white;
+            text-decoration: none;
+            text-align: center;
+            padding: 10px;
+            border-radius: 10px;
+            font-size: 14px;
+            transition: 0.2s;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .links a:hover {
+            background: rgba(255, 255, 255, 0.15);
+            border-color: #38bdf8;
+        }
+
+        /* Thích ứng di động */
+        @media (max-width: 500px) {
+            .card {
+                flex-direction: column;
+                text-align: center;
+                padding: 24px;
+            }
+            .tags { justify-content: center; }
+            .actions { width: 100%; }
+        }
+    </style>
+</head>
+<body>
+
+    <canvas id="star-canvas"></canvas>
+
+    <div class="card">
+        <div class="info">
+            <h1 class="name">Lê Gia Nhật</h1>
+            <p class="role">Học sinh THCS</p>
+            
+            <div class="tags">
+                <span class="tag">Yêu thích Tin học</span>
+                <span class="tag">Đam mê lập trình</span>
+            </div>
+
+            <p class="motto">Sống để học và tạo giá trị.</p>
+            <p class="dream">Ước Mơ: Chuyên Tin Lê Khiết</p>
+
+            <button class="btn-connect">Kết nối</button>
+
+            <div class="school-info">
+                Trường: THCS Nghĩa Lộ<br>
+                Lớp: 8E
+            </div>
+        </div>
+
+        <div class="actions">
+            <img src="avatar.png" alt="Avatar" class="avatar">
+            
+            <div class="links">
+                <a href="#">Facebook</a>
+                <a href="https://www.facebook.com/share/17XsZtBP7U/">Instagram</a>
+                <a href="#">GitHub</a>
+                <a href="#">YouTube</a>
+                <a href="https://www.tiktok.com/@16th6.6">TikTok</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Tạo hiệu ứng sao bay đơn giản
+        const canvas = document.getElementById('star-canvas');
+        const ctx = canvas.getContext('2d');
+        let stars = [];
+
+        function resize() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+
+        window.onresize = resize;
+        resize();
+
+        for(let i=0; i<150; i++) {
+            stars.push({
+                x: Math.random() * canvas.width,
+                y: Math.random() * canvas.height,
+                size: Math.random() * 2,
+                speed: Math.random() * 0.5
+            });
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            ctx.fillStyle = 'white';
+            stars.forEach(s => {
+                ctx.beginPath();
+                ctx.arc(s.x, s.y, s.size, 0, Math.PI*2);
+                ctx.fill();
+                s.y -= s.speed;
+                if(s.y < 0) s.y = canvas.height;
+            });
+            requestAnimationFrame(animate);
+        }
+        animate();
+    </script>
+
+</body>
+</html>
