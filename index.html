@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Lê Gia Nhật</title>
+
+<style>
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+  font-family:system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto;
+}
+
+body{
+  min-height:100vh;
+  background:#000;
+  overflow:hidden;
+  color:#fff;
+}
+
+/* ===== STAR BACKGROUND ===== */
+.stars{
+  position:fixed;
+  inset:0;
+  z-index:0;
+  overflow:hidden;
+}
+.star{
+  position:absolute;
+  width:2px;
+  height:2px;
+  background:white;
+  opacity:.8;
+  animation:fly 12s linear infinite;
+}
+@keyframes fly{
+  from{
+    transform:translate(-10vw,-10vh);
+    opacity:0;
+  }
+  10%{opacity:1}
+  to{
+    transform:translate(110vw,110vh);
+    opacity:0;
+  }
+}
+
+/* ===== CENTER WRAPPER ===== */
+.wrapper{
+  position:relative;
+  z-index:1;
+  min-height:100vh;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:20px;
+}
+
+/* ===== MAIN PROFILE CARD ===== */
+.profile{
+  width:100%;
+  max-width:1100px;
+  display:flex;
+  gap:24px;
+  align-items:stretch;
+}
+
+/* ===== LEFT CONTENT ===== */
+.left{
+  flex:1;
+  padding:32px;
+  border-radius:18px;
+  background:
+    linear-gradient(rgba(5,10,25,.85),rgba(5,10,25,.85)),
+    url("bg.png") center/cover no-repeat;
+}
+
+.name{
+  font-size:36px;
+  font-weight:700;
+  margin-bottom:6px;
+}
+
+.tags{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin:16px 0;
+}
+
+.tag{
+  padding:8px 16px;
+  border-radius:999px;
+  background:linear-gradient(135deg,#66f2c2,#63d4ff);
+  color:#000;
+  font-size:14px;
+  font-weight:600;
+}
+
+.quote{
+  margin:10px 0;
+  opacity:.9;
+}
+
+.subquote{
+  color:#7ee7ff;
+  margin-bottom:18px;
+}
+
+.info{
+  display:flex;
+  gap:14px;
+  flex-wrap:wrap;
+}
+
+.info .tag{
+  font-weight:500;
+}
+
+/* ===== RIGHT CARD ===== */
+.right{
+  width:300px;
+  padding:24px;
+  border-radius:18px;
+  background:linear-gradient(180deg,#0b1530,#060b18);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+.avatar{
+  width:130px;
+  height:130px;
+  border-radius:50%;
+  border:4px solid #5fdcff;
+  background:url("avatar.png") center/cover no-repeat;
+  margin-bottom:12px;
+}
+
+.right h3{
+  margin-bottom:12px;
+  font-weight:600;
+}
+
+.links{
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.links a{
+  text-decoration:none;
+  text-align:center;
+  padding:12px;
+  border-radius:10px;
+  background:#121c33;
+  color:#fff;
+  transition:.2s;
+}
+
+.links a:hover{
+  background:#1b2a4a;
+}
+
+/* ===== MOBILE ===== */
+@media(max-width:900px){
+  .profile{
+    flex-direction:column;
+    align-items:center;
+  }
+  .right{
+    width:100%;
+    max-width:360px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="stars" id="stars"></div>
+
+<div class="wrapper">
+  <div class="profile">
+
+    <div class="left">
+      <div class="name">Lê Gia Nhật</div>
+
+      <div class="tags">
+        <div class="tag">Yêu thích Tin học</div>
+        <div class="tag">Đam mê lập trình</div>
+      </div>
+
+      <div class="quote">Sống để học và tạo ra giá trị.</div>
+      <div class="subquote">Chuyên Tin Lê Khiết</div>
+
+      <div class="info">
+        <div class="tag">Trường THCS Nghĩa Lộ</div>
+        <div class="tag">Lớp 8E</div>
+      </div>
+    </div>
+
+    <div class="right">
+      <div class="avatar"></div>
+      <h3>Kết nối với tôi</h3>
+      <div class="links">
+        <a href="https://www.facebook.com/share/1BYUGTZGVx/" target="_blank">Facebook</a>
+        <a href="https://www.tiktok.com/@16th6.6?_r=1&_t=ZS-93WmG6URvKG" target="_blank">TikTok</a>
+        <a href="#" target="_blank">Instagram</a>
+        <a href="#" target="_blank">GitHub</a>
+        <a href="#" target="_blank">YouTube</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+const starBox=document.getElementById("stars");
+for(let i=0;i<120;i++){
+  const s=document.createElement("div");
+  s.className="star";
+  s.style.left=Math.random()*100+"vw";
+  s.style.top=Math.random()*100+"vh";
+  s.style.animationDelay=Math.random()*12+"s";
+  s.style.opacity=Math.random();
+  starBox.appendChild(s);
+}
+</script>
+
+</body>
+</html>
