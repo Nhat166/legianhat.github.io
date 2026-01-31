@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<title>Profile</title>
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family: Arial, sans-serif;
+}
+
+body{
+  background:#000;
+  color:#fff;
+  overflow:hidden;
+}
+
+/* ===== NỀN SAO ===== */
+canvas{
+  position:fixed;
+  inset:0;
+  z-index:0;
+}
+
+/* ===== CARD TỔNG ===== */
+.card{
+  position:relative;
+  z-index:1;
+  width:90%;
+  max-width:1100px;
+  margin:100px 0 0 70px;
+  display:flex;
+  gap:30px;
+}
+
+/* ===== KHUNG TRÁI (ẢNH NỀN) ===== */
+.left{
+  flex:2;
+  padding:30px;
+  border-radius:20px;
+  background-image:url("bg.png"); /* bạn tự thêm file ảnh vào repo */
+  background-size:cover;
+  background-position:center;
+  position:relative;
+}
+
+.left::after{
+  content:"";
+  position:absolute;
+  inset:0;
+  background:rgba(0,0,0,0.45);
+  border-radius:20px;
+}
+
+.left > *{
+  position:relative;
+  z-index:1;
+}
+
+h1{
+  font-size:34px;
+}
+
+.sub{
+  color:#7dd3fc;
+  margin:6px 0 14px;
+}
+
+/* ===== BADGE ===== */
+.tags{
+  margin-bottom:16px;
+}
+
+.tags span,
+.info span{
+  display:inline-block;
+  background:linear-gradient(135deg,#38bdf8,#22d3ee);
+  color:#022c22;
+  padding:6px 14px;
+  border-radius:999px;
+  font-size:13px;
+  margin:4px 6px 4px 0;
+}
+
+/* ===== CÂU NÓI ===== */
+.quote{
+  margin:16px 0 4px;
+  color:#e5e7eb;
+}
+
+.subquote{
+  color:#7dd3fc;
+  font-size:14px;
+}
+
+/* ===== INFO ===== */
+.info{
+  margin-top:16px;
+}
+
+/* ===== KHUNG PHẢI ===== */
+.right{
+  flex:1;
+  background:rgba(15,23,42,0.9);
+  border-radius:20px;
+  padding:20px;
+  text-align:center;
+}
+
+.avatar{
+  width:130px;
+  height:130px;
+  border-radius:50%;
+  object-fit:cover;
+  margin-bottom:10px;
+}
+
+.right h3{
+  margin-bottom:10px;
+}
+
+.right a{
+  display:block;
+  margin:8px 0;
+  padding:10px;
+  background:#020617;
+  border-radius:10px;
+  color:#fff;
+  text-decoration:none;
+}
+</style>
+</head>
+
+<body>
+
+<canvas id="stars"></canvas>
+
+<div class="card">
+
+  <div class="left">
+    <h1>Lê Gia Nhật</h1>
+    <p class="sub">Học sinh THCS</p>
+
+    <div class="tags">
+      <span>Yêu thích Tin học</span>
+      <span>Đam mê lập trình</span>
+    </div>
+
+    <p class="quote">Sống để học và tạo giá trị.</p>
+    <p class="subquote">Chuyên Tin Lê Khiết</p>
+
+    <div class="info">
+      <span>Trường THCS Nghĩa Lộ</span>
+      <span>Lớp 8E</span>
+    </div>
+  </div>
+
+  <div class="right">
+    <img src="avatar.png" class="avatar">
+    <h3>Kết nối với tôi</h3>
+
+    <a href="https://www.facebook.com/share/1BYUGTZGVx/" target="_blank">Facebook</a>
+    <a href="https://www.tiktok.com/@16th6.6" target="_blank">TikTok</a>
+    <a href="#">Instagram</a>
+    <a href="#">GitHub</a>
+    <a href="#">YouTube</a>
+  </div>
+
+</div>
+
+<script>
+const canvas = document.getElementById("stars");
+const ctx = canvas.getContext("2d");
+
+function resize(){
+  canvas.width = window.innerWidth;
+  canvas.height = window.innerHeight;
+}
+resize();
+window.addEventListener("resize", resize);
+
+const stars=[];
+const COUNT=180;
+
+for(let i=0;i<COUNT;i++){
+  stars.push({
+    x:Math.random()*canvas.width,
+    y:Math.random()*canvas.height,
+    r:Math.random()*1.5+0.5,
+    vx:Math.random()*0.6+0.3,
+    vy:Math.random()*0.6+0.3,
+    a:Math.random()
+  });
+}
+
+function draw(){
+  ctx.clearRect(0,0,canvas.width,canvas.height);
+
+  for(const s of stars){
+    ctx.beginPath();
+    ctx.fillStyle=`rgba(255,255,255,${0.5+Math.sin(s.a)*0.5})`;
+    ctx.arc(s.x,s.y,s.r,0,Math.PI*2);
+    ctx.fill();
+
+    s.x+=s.vx;
+    s.y+=s.vy;
+    s.a+=0.02;
+
+    if(s.x>canvas.width || s.y>canvas.height){
+      s.x=Math.random()*canvas.width*0.2;
+      s.y=-10;
+    }
+  }
+
+  requestAnimationFrame(draw);
+}
+draw();
+</script>
+
+</body>
+</html>
