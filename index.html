@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lê Gia Nhật</title>
+
+<style>
+/* RESET */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:Arial, Helvetica, sans-serif;
+}
+
+/* NỀN ĐEN + SAO */
+body{
+  min-height:100vh;
+  background:black;
+  overflow:hidden;
+  color:#fff;
+}
+
+/* SAO BAY CHÉO */
+.stars{
+  position:fixed;
+  inset:0;
+  overflow:hidden;
+  z-index:0;
+}
+.star{
+  position:absolute;
+  width:2px;
+  height:2px;
+  background:white;
+  opacity:0.8;
+  animation:fly 12s linear infinite;
+}
+@keyframes fly{
+  from{
+    transform:translate(-10vw,-10vh);
+    opacity:0;
+  }
+  10%{opacity:1;}
+  to{
+    transform:translate(110vw,110vh);
+    opacity:0;
+  }
+}
+
+/* KHUNG CHÍNH */
+.wrapper{
+  position:relative;
+  z-index:1;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  min-height:100vh;
+}
+
+/* BẢNG NGANG */
+.card{
+  width:92%;
+  max-width:1100px;
+  min-height:360px;
+  display:grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  background:rgba(10,20,40,0.75);
+  border-radius:22px;
+  overflow:hidden;
+  backdrop-filter:blur(10px);
+}
+
+/* BÊN TRÁI */
+.left{
+  padding:36px 40px;
+  background:
+    linear-gradient(rgba(10,20,40,0.75),rgba(10,20,40,0.75)),
+    url("bg.png") center/cover no-repeat;
+}
+
+.name{
+  font-size:42px;
+  font-weight:700;
+  margin-bottom:16px;
+}
+
+.tags{
+  display:flex;
+  gap:12px;
+  flex-wrap:wrap;
+  margin-bottom:18px;
+}
+.tag{
+  padding:8px 18px;
+  border-radius:999px;
+  background:linear-gradient(135deg,#5fffd7,#4dd7ff);
+  color:#003;
+  font-size:14px;
+  font-weight:600;
+}
+
+.quote{
+  font-size:18px;
+  margin-bottom:6px;
+}
+.highlight{
+  font-size:18px;
+  color:#6fd6ff;
+  margin-bottom:22px;
+}
+
+.info{
+  display:flex;
+  gap:16px;
+  flex-wrap:wrap;
+}
+.info .tag{
+  background:linear-gradient(135deg,#5fffd7,#4dd7ff);
+}
+
+/* BÊN PHẢI */
+.right{
+  padding:30px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  gap:18px;
+  background:rgba(5,10,25,0.65);
+}
+
+.avatar{
+  width:150px;
+  height:150px;
+  border-radius:50%;
+  border:5px solid #4dd7ff;
+  background:url("avatar.png") center/cover no-repeat;
+}
+
+.social{
+  width:100%;
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+}
+
+.social a,
+.social div{
+  text-align:center;
+  padding:12px;
+  border-radius:12px;
+  background:rgba(255,255,255,0.06);
+  color:white;
+  text-decoration:none;
+  font-size:16px;
+}
+
+/* MOBILE */
+@media(max-width:800px){
+  .card{
+    grid-template-columns:1fr;
+  }
+  .right{
+    padding-bottom:40px;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<!-- SAO -->
+<div class="stars" id="stars"></div>
+
+<div class="wrapper">
+  <div class="card">
+
+    <!-- TRÁI -->
+    <div class="left">
+      <div class="name">Lê Gia Nhật</div>
+
+      <div class="tags">
+        <div class="tag">Yêu thích Tin học</div>
+        <div class="tag">Đam mê lập trình</div>
+      </div>
+
+      <div class="quote">Sống để học và tạo ra giá trị.</div>
+      <div class="highlight">Chuyên Tin Lê Khiết</div>
+
+      <div class="info">
+        <div class="tag">Trường THCS Nghĩa Lộ</div>
+        <div class="tag">Lớp 8E</div>
+      </div>
+    </div>
+
+    <!-- PHẢI -->
+    <div class="right">
+      <div class="avatar"></div>
+
+      <div class="social">
+        <a href="https://www.facebook.com/share/17XsZtBP7U/" target="_blank">Facebook</a>
+        <a href="https://www.tiktok.com/@16th6.6?_r=1&_t=ZS-93X5BvvQwHk" target="_blank">TikTok</a>
+        <div>Instagram</div>
+        <div>GitHub</div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+/* TẠO SAO */
+const starBox = document.getElementById("stars");
+for(let i=0;i<120;i++){
+  const s=document.createElement("div");
+  s.className="star";
+  s.style.left=Math.random()*100+"vw";
+  s.style.top=Math.random()*100+"vh";
+  s.style.animationDuration=8+Math.random()*10+"s";
+  s.style.animationDelay=Math.random()*10+"s";
+  starBox.appendChild(s);
+}
+</script>
+
+</body>
+</html>
