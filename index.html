@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Lê Gia Nhật</title>
+    <style>
+        /* 1. Nền đen và hiệu ứng sao bay chéo */
+        body {
+            margin: 0;
+            padding: 0;
+            background: #0a0a0a;
+            color: white;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            overflow: hidden; /* Giữ sao không tràn màn hình */
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .stars-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -1;
+        }
+
+        .star {
+            position: absolute;
+            background: white;
+            border-radius: 50%;
+            opacity: 0.5;
+            animation: moveStar 5s linear infinite;
+        }
+
+        @keyframes moveStar {
+            from { transform: translate(110vw, -10vh); }
+            to { transform: translate(-10vw, 110vh); }
+        }
+
+        /* 2. Khung Profile chính */
+        .card {
+            background: rgba(25, 25, 25, 0.9);
+            border: 1px solid #333;
+            border-radius: 20px;
+            padding: 30px;
+            width: 90%;
+            max-width: 600px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+        }
+
+        /* 3. Bên trái: Thông tin */
+        .info-section {
+            flex: 1;
+        }
+
+        h1 {
+            font-size: 24px;
+            margin: 0 0 15px 0;
+        }
+
+        .tags {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+
+        /* Yêu cầu: Đóng khung màu xanh Pastel nằm ngang */
+        .tag {
+            border: 1px solid #A7C7E7; /* Màu xanh pastel */
+            color: #A7C7E7;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            white-space: nowrap;
+        }
+
+        .description {
+            font-size: 14px;
+            color: #ccc;
+            margin-bottom: 20px;
+        }
+
+        .btn-connect {
+            background: #00c853;
+            color: white;
+            border: none;
+            padding: 10px 25px;
+            border-radius: 8px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        /* 4. Bên phải: Avatar và Link */
+        .links-section {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .avatar-circle {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            border: 2px solid #444;
+            overflow: hidden;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #222;
+        }
+
+        .avatar-circle img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        .social-link {
+            width: 150px;
+            padding: 8px;
+            background: #1e1e1e;
+            color: #ddd;
+            text-decoration: none;
+            text-align: center;
+            border-radius: 5px;
+            font-size: 13px;
+            transition: 0.3s;
+            border: 1px solid #333;
+        }
+
+        .social-link:hover {
+            background: #333;
+            color: white;
+        }
+
+        /* Tối ưu cho màn hình rất nhỏ */
+        @media (max-width: 480px) {
+            .card {
+                padding: 15px;
+            }
+            .social-link {
+                width: 110px;
+            }
+            h1 { font-size: 20px; }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="stars-container" id="stars"></div>
+
+    <div class="card">
+        <div class="info-section">
+            <h1>Lê Gia Nhật</h1>
+            <div class="tags">
+                <div class="tag">Yêu thích Tin học</div>
+                <div class="tag">Đam mê lập trình</div>
+            </div>
+            <p class="description">Sống để học và tạo giá trị.</p>
+            <button class="btn-connect">Kết nối</button>
+        </div>
+
+        <div class="links-section">
+            <div class="avatar-circle">
+                <img src="avatar.png" alt="Avatar">
+            </div>
+            <a href="https://www.facebook.com/share/17XsZtBP7U/" class="social-link" target="_blank">Facebook</a>
+            <a href="#" class="social-link">Instagram</a>
+            <a href="#" class="social-link">GitHub</a>
+            <a href="#" class="social-link">YouTube</a>
+            <a href="https://www.tiktok.com/@16th6.6" class="social-link" target="_blank">TikTok</a>
+        </div>
+    </div>
+
+    <script>
+        // Tạo sao bay ngẫu nhiên
+        const container = document.getElementById('stars');
+        for (let i = 0; i < 50; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            const size = Math.random() * 3 + 'px';
+            star.style.width = size;
+            star.style.height = size;
+            star.style.left = Math.random() * 100 + 'vw';
+            star.style.top = Math.random() * 100 + 'vh';
+            star.style.animationDuration = (Math.random() * 3 + 2) + 's';
+            star.style.animationDelay = (Math.random() * 5) + 's';
+            container.appendChild(star);
+        }
+    </script>
+</body>
+</html>
