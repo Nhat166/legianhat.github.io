@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Lê Gia Nhật</title>
+
+<style>
+/* ===== RESET ===== */
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+/* ===== BODY – CĂN GIỮA MÀN ===== */
+body{
+  min-height:100vh;
+  background:#000;
+  display:flex;
+  justify-content:center;
+  align-items:center;
+  overflow:hidden;
+  color:#fff;
+}
+
+/* ===== SAO BAY CHÉO ===== */
+.stars{
+  position:fixed;
+  inset:0;
+  overflow:hidden;
+  z-index:0;
+}
+
+.star{
+  position:absolute;
+  width:2px;
+  height:2px;
+  background:white;
+  opacity:.8;
+  animation:fly linear infinite;
+}
+
+@keyframes fly{
+  from{
+    transform:translate(-10vw,-10vh);
+    opacity:0;
+  }
+  to{
+    transform:translate(110vw,110vh);
+    opacity:1;
+  }
+}
+
+/* ===== WRAPPER ===== */
+.profile-wrapper{
+  width:100%;
+  max-width:1100px;
+  padding:16px;
+  z-index:1;
+}
+
+/* ===== CARD ===== */
+.card{
+  display:flex;
+  gap:32px;
+  align-items:stretch;
+}
+
+/* ===== LEFT ===== */
+.left{
+  flex:1;
+  background:url("bg.png") center/cover no-repeat;
+  border-radius:16px;
+  padding:28px;
+  backdrop-filter:blur(6px);
+}
+
+/* ===== TEXT ===== */
+.name{
+  font-size:28px;
+  font-weight:700;
+}
+
+.role{
+  font-size:14px;
+  opacity:.7;
+  margin-top:4px;
+}
+
+.tags{
+  display:flex;
+  gap:10px;
+  flex-wrap:wrap;
+  margin:14px 0;
+}
+
+.tag{
+  background:linear-gradient(135deg,#7dd3fc,#34d399);
+  color:#000;
+  padding:6px 14px;
+  border-radius:999px;
+  font-size:13px;
+  font-weight:600;
+}
+
+.quote{
+  margin-top:8px;
+  font-size:14px;
+  opacity:.85;
+}
+
+.subquote{
+  margin-top:4px;
+  font-size:14px;
+  color:#7dd3fc;
+  font-weight:600;
+}
+
+.info{
+  display:flex;
+  gap:16px;
+  margin-top:18px;
+}
+
+.info-box{
+  background:linear-gradient(135deg,#7dd3fc,#34d399);
+  color:#000;
+  padding:6px 14px;
+  border-radius:999px;
+  font-size:13px;
+  font-weight:600;
+}
+
+/* ===== RIGHT ===== */
+.right{
+  width:260px;
+  background:rgba(10,20,40,.9);
+  border-radius:16px;
+  padding:20px;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+}
+
+/* ===== AVATAR ===== */
+.avatar{
+  width:120px;
+  height:120px;
+  border-radius:50%;
+  border:4px solid #38bdf8;
+  overflow:hidden;
+  margin-bottom:14px;
+}
+
+.avatar img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+}
+
+/* ===== SOCIAL ===== */
+.social-title{
+  margin-bottom:12px;
+  font-weight:600;
+}
+
+.social a{
+  display:block;
+  width:100%;
+  text-align:center;
+  padding:10px 0;
+  margin-bottom:10px;
+  border-radius:10px;
+  background:rgba(255,255,255,.05);
+  color:#fff;
+  text-decoration:none;
+  font-size:14px;
+}
+
+/* ===== MOBILE ===== */
+@media(max-width:768px){
+  .card{
+    flex-direction:column;
+    align-items:center;
+  }
+  .right{
+    width:100%;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div class="stars">
+  <script>
+    for(let i=0;i<120;i++){
+      const s=document.createElement("div");
+      s.className="star";
+      s.style.left=Math.random()*100+"vw";
+      s.style.top=Math.random()*100+"vh";
+      s.style.animationDuration=4+Math.random()*6+"s";
+      document.currentScript.parentElement.appendChild(s);
+    }
+  </script>
+</div>
+
+<div class="profile-wrapper">
+  <div class="card">
+
+    <!-- LEFT -->
+    <div class="left">
+      <div class="name">Lê Gia Nhật</div>
+      <div class="role">Học sinh THCS</div>
+
+      <div class="tags">
+        <div class="tag">Yêu thích Tin học</div>
+        <div class="tag">Đam mê lập trình</div>
+      </div>
+
+      <div class="quote">Sống để học và tạo ra giá trị.</div>
+      <div class="subquote">Chuyên Tin Lê Khiết</div>
+
+      <div class="info">
+        <div class="info-box">Trường THCS Nghĩa Lộ</div>
+        <div class="info-box">Lớp 8E</div>
+      </div>
+    </div>
+
+    <!-- RIGHT -->
+    <div class="right">
+      <div class="avatar">
+        <img src="avatar.png" alt="avatar">
+      </div>
+
+      <div class="social-title">Kết nối với tôi</div>
+
+      <div class="social">
+        <a href="https://www.facebook.com/share/1BYUGTZGVx/" target="_blank">Facebook</a>
+        <a href="https://www.tiktok.com/@16th6.6" target="_blank">TikTok</a>
+        <a href="#">Instagram</a>
+        <a href="#">GitHub</a>
+        <a href="#">YouTube</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+</body>
+</html>
